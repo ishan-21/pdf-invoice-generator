@@ -1,13 +1,15 @@
 package com.ishan.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.stereotype.Component;
 
 import java.util.UUID;
+
 
 public class Invoice {
 
     @JsonProperty("invoice_id")
-    private String invoiceId;
+    private final String invoiceId;
 
     @JsonProperty("user_id")
     private String userId;
@@ -18,9 +20,23 @@ public class Invoice {
     @JsonProperty("url_pdf")
     private String pdfUrl;
 
+    public Invoice(String userId, int amount, String pdfUrl) {
+        this.invoiceId = UUID.randomUUID().toString();
+        this.userId = userId;
+        this.amount = amount;
+        this.pdfUrl = pdfUrl;
+    }
+
+    public Invoice(){
+        super();
+        this.invoiceId = UUID.randomUUID().toString();
+    }
+
     public String toString(){
         return "INVOICE ID: " + invoiceId +  " USER ID: " + userId + " AMOUNT: " + amount + " PDF URL: " + pdfUrl;
     }
+
+    // there is no set invoice id method as that is to be set in the constructor itself
     public void setUserId(String userId) {
         this.userId = userId;
     }
@@ -49,10 +65,4 @@ public class Invoice {
         return pdfUrl;
     }
 
-    public Invoice(String userId, int amount, String pdfUrl) {
-        this.invoiceId = UUID.randomUUID().toString();
-        this.userId = userId;
-        this.amount = amount;
-        this.pdfUrl = pdfUrl;
-    }
 }

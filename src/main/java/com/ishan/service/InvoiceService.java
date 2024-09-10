@@ -1,22 +1,49 @@
 package com.ishan.service;
 
-import com.ishan.context.Application;
 import com.ishan.model.Invoice;
 import com.ishan.model.User;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+@Component
+@Scope("singleton")
 public class InvoiceService {
 
     private final UserService userService;
-    private final List<Invoice> listOfAllInvoices;
+    private final String cdnUrl;
+    private final List<Invoice> listOfAllInvoices = new CopyOnWriteArrayList<Invoice>();
 
-    public InvoiceService(UserService userService)
-    {
+
+    public InvoiceService(@Autowired UserService userService, @Value("${cdn.url}") String cdnUrl){
+        // the value of cdnUrl will be picked up from here
+        // ${cdn.url} will be read from the application.properties file mentioned in the @PropertySource
+        // annotation in the configuration class
         this.userService = userService;
-        this.listOfAllInvoices = new CopyOnWriteArrayList<Invoice>();
+        this.cdnUrl = cdnUrl;
     }
+
+    @PostConstruct
+    public void initBean(){
+        System.out.println("Fetching the template for pdf from Amazon S3......");
+    }
+
+    @PreDestroy
+    public void destroyBean(){
+        System.out.println("Deleting the fetched templates from the local cache......");
+    }
+
+//    public InvoiceService(UserService userService)
+//    {
+//        this.userService = userService;
+//        this.listOfAllInvoices = new CopyOnWriteArrayList<Invoice>();
+//    }
     // this is dependency injection, the object of the InvoiceService class needs an object of the
     // UserService class but the object of the UserService class is not given that explicitly bahar se
     // Instead, this dependency is injected into the Invoice service class in the Application class
@@ -24,6 +51,10 @@ public class InvoiceService {
     public List<Invoice> findAllInvoices()
     {
         return this.listOfAllInvoices;
+    }
+
+    public String getCdnUrl(){
+        return this.cdnUrl;
     }
 
     public Invoice createInvoice( String userId, int amount )
@@ -36,7 +67,10 @@ public class InvoiceService {
         }
 
         // if user exists
-        Invoice newInvoice = new Invoice(userId, amount, "https://www.clickdimensions.com/links/TestPDFfile.pdf");
+
+        // REAL PDF CREATION AND STORING IT IN THE CDN
+
+        Invoice newInvoice = new Invoice(userId, amount, this.cdnUrl + "/images/default/sample.pdf");
         this.listOfAllInvoices.add(newInvoice);
         return newInvoice;
     }

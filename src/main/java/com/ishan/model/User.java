@@ -1,5 +1,8 @@
 package com.ishan.model;
 
+import org.springframework.stereotype.Component;
+
+
 public class User {
 
     private String userId;

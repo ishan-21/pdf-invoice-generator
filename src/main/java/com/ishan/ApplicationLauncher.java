@@ -1,17 +1,15 @@
 package com.ishan;
 
-import com.ishan.context.Application;
 import com.ishan.web.MyFancyPdfInvoicesServlet;
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.Wrapper;
 import org.apache.catalina.startup.Tomcat;
 
-public class ApplicationLauncher {
-
+public class ApplicationLauncher
+{
     public static void main(String[] args) throws LifecycleException
     {
-
         Tomcat tomcat = new Tomcat();
         // instantiating a new tomcat
 
@@ -24,7 +22,7 @@ public class ApplicationLauncher {
 
         Wrapper servlet = Tomcat.addServlet(ctx, "myFancyPdfInvoicesServlet", new MyFancyPdfInvoicesServlet());
 
-        // servlet.setLoadOnStartup(1);
+        // servlet.setLoadOnStartup(1); => if this was not commented then the servlet would get created
         servlet.addMapping("/*");
 
         tomcat.start();

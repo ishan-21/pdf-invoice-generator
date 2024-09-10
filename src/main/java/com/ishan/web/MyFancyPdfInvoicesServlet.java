@@ -1,13 +1,16 @@
 package com.ishan.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ishan.context.MyFancyPdfInvoicesApplicationConfiguration;
 import com.ishan.model.Invoice;
-import com.ishan.context.Application;
 import com.ishan.service.InvoiceService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -17,9 +20,19 @@ public class MyFancyPdfInvoicesServlet extends HttpServlet {
 
     private InvoiceService invoiceService;
     private ObjectMapper objectMapper;
+
+    @Override
+    public void init() throws ServletException {
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(MyFancyPdfInvoicesApplicationConfiguration.class);
+
+        ctx.registerShutdownHook();
+
+        invoiceService = ctx.getBean(InvoiceService.class);
+        objectMapper = ctx.getBean(ObjectMapper.class);
+    }
+
     public MyFancyPdfInvoicesServlet(){
-        this.invoiceService = Application.invoiceService;
-        this.objectMapper = Application.objectMapper;
+
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -35,15 +48,13 @@ public class MyFancyPdfInvoicesServlet extends HttpServlet {
             String jsonString = objectMapper.writeValueAsString(listOfAllInvoices);
             out.println(jsonString);
         }else{
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            // do nothing
         }
 
     }
 
-
-    /*
-        There are two parameters to post: userId and amount: at this point, we are doing this through postman 
-    */
+    // we are using postman at this point to take in parameters through the
+    // post request => userId and amount
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
