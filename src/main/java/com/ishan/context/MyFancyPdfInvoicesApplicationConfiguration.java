@@ -5,6 +5,7 @@ import com.ishan.model.User;
 import com.ishan.service.InvoiceService;
 import com.ishan.service.UserService;
 import org.springframework.context.annotation.*;
+import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
@@ -33,4 +34,9 @@ public class MyFancyPdfInvoicesApplicationConfiguration {
     public ObjectMapper getObjectMapper(){
         return new ObjectMapper();
     }
+
+//    @Bean // de-comment if you are using validation in @RequestParam
+//    public MethodValidationPostProcessor methodValidationPostProcessor() {
+//        return new MethodValidationPostProcessor();
+//    }
 }

@@ -1,10 +1,13 @@
 package com.ishan.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotBlank;
+
 
 public class InvoiceDto {
 
     @JsonProperty("user_id")
+    @NotBlank
     private String userId;
 
     @JsonProperty("amount")

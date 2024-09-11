@@ -3,12 +3,15 @@ package com.ishan.web;
 import com.ishan.dto.InvoiceDto;
 import com.ishan.model.Invoice;
 import com.ishan.service.InvoiceService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+// @Validated // de-comment if you are using validation through @RequestParam
 public class MyFancyPdfInvoicesController {
 
     private InvoiceService invoiceService;
@@ -35,13 +38,13 @@ public class MyFancyPdfInvoicesController {
 //    }
 
 //    @PostMapping("/add-invoice")
-//    public Invoice addInvoice(@RequestParam("user_id") String userId, @RequestParam("amount") int amount){
+//    public Invoice addInvoice(@RequestParam("user_id") @NotBlank String userId, @RequestParam("amount") int amount){
 //        Invoice newlyCreatedInvoice = invoiceService.createInvoice(userId, amount);
 //        return newlyCreatedInvoice;
 //    }
 
       @PostMapping("/add-invoice")
-      public Invoice addInvoice(@RequestBody InvoiceDto invoiceDto){
+      public Invoice addInvoice(@RequestBody @Valid InvoiceDto invoiceDto){
         Invoice newlyCreatedInvoice = invoiceService.createInvoice(invoiceDto.getUserId(), invoiceDto.getAmount());
         return newlyCreatedInvoice;
       }

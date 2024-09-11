@@ -56,6 +56,18 @@
 <!--            <artifactId>jackson-dataformat-xml</artifactId>-->
 <!--            <version>2.15.0</version>-->
 <!--        </dependency>-->
+        <!-- the below two dependencies are for the purpose of bean validation of InvoiceDto
+         received from the front-end -->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>8.0.0.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.expressly</groupId>
+            <artifactId>expressly</artifactId>
+            <version>5.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>
