@@ -1,31 +1,41 @@
 package com.ishan;
 
-import com.ishan.web.MyFancyPdfInvoicesServlet;
+import com.ishan.context.MyFancyPdfInvoicesApplicationConfiguration;
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.Wrapper;
 import org.apache.catalina.startup.Tomcat;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.servlet.DispatcherServlet;
 
-public class ApplicationLauncher
-{
-    public static void main(String[] args) throws LifecycleException
-    {
+import jakarta.servlet.ServletContext;
+
+public class ApplicationLauncher {
+
+    public static void main(String[] args) throws LifecycleException {
+
         Tomcat tomcat = new Tomcat();
-        // instantiating a new tomcat
-
         tomcat.setPort(8080);
-        // setting the port of the servlet container (tomcat) to 8080
-
         tomcat.getConnector();
 
-        Context ctx = tomcat.addContext("", null);
+        Context tomcatCtx = tomcat.addContext("", null);
 
-        Wrapper servlet = Tomcat.addServlet(ctx, "myFancyPdfInvoicesServlet", new MyFancyPdfInvoicesServlet());
-
-        // servlet.setLoadOnStartup(1); => if this was not commented then the servlet would get created
+        WebApplicationContext appCtx = createApplicationContext(tomcatCtx.getServletContext());
+        DispatcherServlet dispatcherServlet = new DispatcherServlet(appCtx);
+        Wrapper servlet = Tomcat.addServlet(tomcatCtx, "dispatcherServlet", dispatcherServlet);
+        servlet.setLoadOnStartup(1);
         servlet.addMapping("/*");
 
         tomcat.start();
-        System.out.println("The server is now running.");
+    }
+
+    public static WebApplicationContext createApplicationContext(ServletContext servletContext) {
+        AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
+        ctx.register(MyFancyPdfInvoicesApplicationConfiguration.class);
+        ctx.setServletContext(servletContext);
+        ctx.refresh();
+        ctx.registerShutdownHook();
+        return ctx;
     }
 }
