@@ -1,11 +1,7 @@
 package com.ishan.context;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ishan.model.User;
-import com.ishan.service.InvoiceService;
-import com.ishan.service.UserService;
 import org.springframework.context.annotation.*;
-import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
@@ -13,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @PropertySource("classpath:/application.properties")
 @EnableWebMvc
 //@PropertySource("classpath:/someOtherFile.properties")
-public class MyFancyPdfInvoicesApplicationConfiguration {
+public class ApplicationConfiguration {
 
     /* No need of the following when we are using Component for the following */
 //    @Bean

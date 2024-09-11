@@ -5,18 +5,17 @@ import com.ishan.model.Invoice;
 import com.ishan.service.InvoiceService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 // @Validated // de-comment if you are using validation through @RequestParam
-public class MyFancyPdfInvoicesController {
+public class InvoicesController {
 
     private InvoiceService invoiceService;
 
-    public MyFancyPdfInvoicesController(@Autowired InvoiceService invoiceService){
+    public InvoicesController(@Autowired InvoiceService invoiceService){
         this.invoiceService = invoiceService;
     }
 
