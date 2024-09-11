@@ -19,11 +19,6 @@ public class InvoicesController {
         this.invoiceService = invoiceService;
     }
 
-    @GetMapping("/")
-    public String homePage(){
-        String response = "<h1>Hello World</h1>\n" + "This is my very first, embedded Tomcat, HTML Page!";
-        return response;
-    }
 
     @GetMapping("/show-invoices")
     public List<Invoice> getAllInvoices(){
