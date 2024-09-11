@@ -28,6 +28,8 @@ public class ApplicationLauncher {
         servlet.addMapping("/*");
 
         tomcat.start();
+
+        System.out.println("The server is now running");
     }
 
     public static WebApplicationContext createApplicationContext(ServletContext servletContext) {
