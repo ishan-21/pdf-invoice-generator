@@ -10,7 +10,7 @@ import java.util.UUID;
 @Scope("singleton")
 public class UserService {
 
-    public User findUserById(String userId ){
+    public User findUserById(String userId){
         String randomUserName = UUID.randomUUID().toString();
         return new User(userId, randomUserName);
     }

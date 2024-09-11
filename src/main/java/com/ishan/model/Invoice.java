@@ -36,7 +36,7 @@ public class Invoice {
         return "INVOICE ID: " + invoiceId +  " USER ID: " + userId + " AMOUNT: " + amount + " PDF URL: " + pdfUrl;
     }
 
-    // there is no set invoice id method as that is to be set in the constructor itself
+    // invoiceId is final so there is no setter for that 
     public void setUserId(String userId) {
         this.userId = userId;
     }

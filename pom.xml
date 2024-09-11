@@ -44,35 +44,45 @@
             <artifactId>spring-context</artifactId>
             <version>6.0.9</version>
         </dependency>
-        <!-- this is the dependency for spring model view controller -->
+        <!-- this is the dependency for spring-mvc framework -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>6.0.9</version>
         </dependency>
-        <!-- the dependency for java to xml conversion -->
-<!--        <dependency>-->
-<!--            <groupId>com.fasterxml.jackson.dataformat</groupId>-->
-<!--            <artifactId>jackson-dataformat-xml</artifactId>-->
-<!--            <version>2.15.0</version>-->
-<!--        </dependency>-->
-        <!-- the below two dependencies are for the purpose of bean validation of InvoiceDto
-         received from the front-end -->
+
+        <!--        <dependency>-->
+        <!--            <groupId>com.fasterxml.jackson.dataformat</groupId>-->
+        <!--            <artifactId>jackson-dataformat-xml</artifactId>-->
+        <!--            <version>2.15.0</version>-->
+        <!--        </dependency>-->
+
+        <!-- dependencies for validating user inputs -->
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>8.0.0.Final</version>
         </dependency>
+
         <dependency>
             <groupId>org.glassfish.expressly</groupId>
             <artifactId>expressly</artifactId>
             <version>5.0.0</version>
         </dependency>
+
+        <!-- dependency for rendering html pages through the thymeleaf library -->
         <dependency>
             <groupId>org.thymeleaf</groupId>
             <artifactId>thymeleaf-spring6</artifactId> <!-- 1 -->
             <version>3.1.1.RELEASE</version>
         </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -101,7 +111,8 @@
                         </goals>
                         <configuration>
                             <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>com.ishan.ApplicationLauncher</mainClass>
                                 </transformer>
                             </transformers>

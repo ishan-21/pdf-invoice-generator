@@ -11,17 +11,14 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public String handlemethodArgumentNotValid(MethodArgumentNotValidException exception) { //
-        // TODO you can choose to return your custom object here, which will then get transformed to json/xml etc.
-        return "Sorry, that was not quite right: " + exception.getMessage();
+    @ExceptionHandler(value = {MethodArgumentNotValidException.class})
+    public String handleExceptionInMethodArguments(MethodArgumentNotValidException exception){
+        return "There's some problems with the method arguments:\n\n" + exception.getMessage();
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(ConstraintViolationException.class)
-    public String handleConstraintViolation(ConstraintViolationException exception) { //
-        // TODO you can choose to return your custom object here, which will then get transformed to json/xml etc.
-        return "Sorry, that was not quite right: " + exception.getMessage();
+    @ExceptionHandler( value = {ConstraintViolationException.class})
+    public String handleConstraintViolation(ConstraintViolationException exception){
+        return "There's some problem with the violation of constraints: \n\n" + exception.getMessage();
     }
-
 }

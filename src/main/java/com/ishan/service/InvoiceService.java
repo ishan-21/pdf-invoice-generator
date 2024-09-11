@@ -18,13 +18,14 @@ public class InvoiceService {
 
     private final UserService userService;
     private final String cdnUrl;
-    private final List<Invoice> listOfAllInvoices = new CopyOnWriteArrayList<Invoice>();
+    private final List<Invoice> listOfAllInvoices;
 
 
     public InvoiceService(@Autowired UserService userService, @Value("${cdn.url}") String cdnUrl){
         // the value of cdnUrl will be picked up from here
         // ${cdn.url} will be read from the application.properties file mentioned in the @PropertySource
         // annotation in the configuration class
+        this.listOfAllInvoices = new CopyOnWriteArrayList<Invoice>();
         this.userService = userService;
         this.cdnUrl = cdnUrl;
     }

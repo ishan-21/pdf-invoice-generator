@@ -1,15 +1,22 @@
 package com.ishan.context;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.thymeleaf.spring6.SpringTemplateEngine;
+import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
+import org.thymeleaf.spring6.view.ThymeleafViewResolver;
 
 @Configuration
 @ComponentScan(basePackages = {"com.ishan"})
 @PropertySource("classpath:/application.properties")
-@EnableWebMvc
 //@PropertySource("classpath:/someOtherFile.properties")
+@EnableWebMvc // THIS ENABLES RESPONSE BODY TO WORK IN THE @RestController
 public class ApplicationConfiguration {
+
+//    @Bean // de-comment if using validation though @RequestParam
+//    public MethodValidationPostProcessor methodValidationPostProcessor() {
+//        return new MethodValidationPostProcessor();
+//    }
 
     /* No need of the following when we are using Component for the following */
 //    @Bean
@@ -24,15 +31,30 @@ public class ApplicationConfiguration {
 //        return new InvoiceService(userService);
 //    }
 
-    // we cannot use @Bean for getting object mapper bean as it is not a class that we wrote
     @Bean
-    @Scope("singleton")
-    public ObjectMapper getObjectMapper(){
-        return new ObjectMapper();
+    public SpringResourceTemplateResolver templateResolver() {
+        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
+        templateResolver.setPrefix("classpath:/views/");
+        // classpath is /src/main/resources
+        templateResolver.setCacheable(false);
+        return templateResolver;
     }
 
-//    @Bean // de-comment if you are using validation in @RequestParam
-//    public MethodValidationPostProcessor methodValidationPostProcessor() {
-//        return new MethodValidationPostProcessor();
-//    }
+    @Bean
+    public SpringTemplateEngine templateEngine() {
+        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+        templateEngine.setTemplateResolver(templateResolver());
+        return templateEngine;
+    }
+
+    @Bean
+    public ThymeleafViewResolver viewResolver() {
+        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+        viewResolver.setTemplateEngine(templateEngine());
+
+        return viewResolver;
+    }
+
+
+
 }

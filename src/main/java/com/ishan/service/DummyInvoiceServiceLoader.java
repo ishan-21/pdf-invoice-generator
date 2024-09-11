@@ -5,10 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-@Service
-// carries the same technical meaning as @Componenet, just semantically clarifies that this is indeed a service
+@Service // carries the same technical meaning as @Componenet, just semantically clarifies that this is indeed a service
 @Profile("dev")
-// gets activated only in the dev environment => this bean is only made then
 public class DummyInvoiceServiceLoader {
 
     private final InvoiceService invoiceService;

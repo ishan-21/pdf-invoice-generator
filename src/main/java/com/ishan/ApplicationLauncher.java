@@ -11,6 +11,11 @@ import org.springframework.web.servlet.DispatcherServlet;
 
 import jakarta.servlet.ServletContext;
 
+/*
+    The ApplicationLauncher is different from the last two modules because in the spring mvc module
+    there is a dispatcher servlet which dispatches http the request to the @Controller(s) and takes
+    http responses back from the controllers and gives the response using view resolver
+ */
 public class ApplicationLauncher {
 
     public static void main(String[] args) throws LifecycleException {
