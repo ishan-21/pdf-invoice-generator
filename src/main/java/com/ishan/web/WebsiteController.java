@@ -20,7 +20,7 @@ public class WebsiteController {
 
     @GetMapping("/")
     public ModelAndView displayHomepage
-            (@RequestParam(value = "userName", required = false, defaultValue = "stranger")
+            (@RequestParam(value = "user_name", required = false, defaultValue = "stranger")
              String userName)
     {
         ModelAndView modelAndView = new ModelAndView();
