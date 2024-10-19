@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+</head>
+<body>
+<p>Hello
+    <span th:text="${userName}" th:remove="tag">[user name yaha aaega]</span>,
+    this is the current date and time:
+    <span th:text="${#temporals.format(currentTime, 'dd-MM-yyyy HH:mm')}">[kuch bhi daal skte yaha]</span>
+</p>
+<div th:if="${username.startsWith('z')}">Your name starts with a lower-case z, unusual!</div>
+</body>
+</html>
