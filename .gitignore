@@ -1,5 +1,8 @@
 *.DS_Store
 *.class
+HELP.md
+*.gradle
 .idea/
 .vscode/
 .target/
+.build/
