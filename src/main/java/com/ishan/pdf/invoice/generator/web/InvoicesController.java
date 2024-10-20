@@ -34,4 +34,9 @@ public class InvoicesController {
         List<Invoice>  listOfAllInvoices = invoiceService.findAllInvoices();
         return listOfAllInvoices;
     }
+
+    @GetMapping("/delete-invoices")
+    public void deleteInvoices(){
+        invoiceService.deleteAllInvoices();
+    }
 }
