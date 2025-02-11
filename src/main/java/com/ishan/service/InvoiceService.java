@@ -1,5 +1,6 @@
 package com.ishan.service;
 
+import com.ishan.constants.Constants;
 import com.ishan.context.Application;
 import com.ishan.model.Invoice;
 import com.ishan.model.User;
@@ -36,7 +37,7 @@ public class InvoiceService {
         }
 
         // if user exists
-        Invoice newInvoice = new Invoice(userId, amount, "https://www.clickdimensions.com/links/TestPDFfile.pdf");
+        Invoice newInvoice = new Invoice(userId, amount, Constants.SAMPLE_PDF_URL);
         this.listOfAllInvoices.add(newInvoice);
         return newInvoice;
     }

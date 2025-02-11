@@ -13,6 +13,4 @@ public class Application {
     // Instead, this dependency is injected into the Invoice service class in the Application class
     public static final ObjectMapper objectMapper = new ObjectMapper();
 
-
-
 }
