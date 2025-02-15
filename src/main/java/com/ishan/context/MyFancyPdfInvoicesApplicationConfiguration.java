@@ -25,7 +25,7 @@ public class MyFancyPdfInvoicesApplicationConfiguration {
 //        return new InvoiceService(userService);
 //    }
 
-    // we cannot use @Bean for getting object mapper bean as it is not a class that we wrote
+    // we cannot use @Component for getting object mapper bean as it is not a class that we wrote
     @Bean
     @Scope("singleton")
     public ObjectMapper getObjectMapper(){

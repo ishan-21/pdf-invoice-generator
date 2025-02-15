@@ -28,7 +28,6 @@ public class Invoice {
     }
 
     public Invoice(){
-        super();
         this.invoiceId = UUID.randomUUID().toString();
     }
 

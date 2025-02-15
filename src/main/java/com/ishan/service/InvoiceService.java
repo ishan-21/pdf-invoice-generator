@@ -1,5 +1,6 @@
 package com.ishan.service;
 
+import com.ishan.constants.Constants;
 import com.ishan.model.Invoice;
 import com.ishan.model.User;
 import jakarta.annotation.PostConstruct;
@@ -45,8 +46,8 @@ public class InvoiceService {
 //        this.listOfAllInvoices = new CopyOnWriteArrayList<Invoice>();
 //    }
     // this is dependency injection, the object of the InvoiceService class needs an object of the
-    // UserService class but the object of the UserService class is not given that explicitly bahar se
-    // Instead, this dependency is injected into the Invoice service class in the Application class
+    // UserService class but the object of the UserService class is not given explicitly bahar se
+    // Instead, this dependency is injected into the InvoiceService class
 
     public List<Invoice> findAllInvoices()
     {
@@ -69,8 +70,7 @@ public class InvoiceService {
         // if user exists
 
         // REAL PDF CREATION AND STORING IT IN THE CDN
-
-        Invoice newInvoice = new Invoice(userId, amount, this.cdnUrl + "/images/default/sample.pdf");
+        Invoice newInvoice = new Invoice(userId, amount, this.cdnUrl + Constants.PDF_URL_SUFFIX);
         this.listOfAllInvoices.add(newInvoice);
         return newInvoice;
     }
