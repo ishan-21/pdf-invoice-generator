@@ -8,6 +8,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -21,19 +22,11 @@ public class MyFancyPdfInvoicesServlet extends HttpServlet {
     private InvoiceService invoiceService;
     private ObjectMapper objectMapper;
 
-    @Override
-    public void init() throws ServletException {
-        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(MyFancyPdfInvoicesApplicationConfiguration.class);
-
-        ctx.registerShutdownHook();
-
-        invoiceService = ctx.getBean(InvoiceService.class);
-        objectMapper = ctx.getBean(ObjectMapper.class);
+    public MyFancyPdfInvoicesServlet(InvoiceService invoiceService, ObjectMapper objectMapper){
+        this.invoiceService = invoiceService;
+        this.objectMapper = objectMapper;
     }
 
-    public MyFancyPdfInvoicesServlet(){
-
-    }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
