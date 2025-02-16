@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 // @Validated  // de-comment if using validation though @RequestParam
-//@Controller   // RestController = Controller + ResponseBody
+// @Controller   // RestController = Controller + ResponseBody
 //@ResponseBody
 public class InvoicesController {
 
@@ -38,7 +38,6 @@ public class InvoicesController {
 //    // @RequestMapping(value = "/add-invoice", method = RequestMethod.POST)
 //    public Invoice createInvoice(@RequestParam("userId") @NotBlank  String userId, @RequestParam("amount") @PositiveOrZero Integer amount) {
 //        Invoice newlyCreatedInvoice = invoiceService.createInvoice(userId, amount);
-//
 //        return newlyCreatedInvoice;
 //    }
 
@@ -46,7 +45,7 @@ public class InvoicesController {
 //    @PostMapping("/add-invoice/{userId}/{amount}")
 //    if the user_id and amount are being sent in as parameters in the POST request
 //    POST http://localhost:8080/add-invoice/someId/5000
-//    public Invoice createInvoice(@PathVariable String userId, @PathVariable Integer amount) {
+//    public Invoice createInvoice(@PathVariable @NotBlank String userId, @PathVariable @PositiveOrZero Integer amount) {
 //        return invoiceService.createInvoice(userId, amount);
 //    }
 

@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
-
 public class Invoice {
 
     @JsonProperty("invoice_id")
@@ -28,7 +27,6 @@ public class Invoice {
     }
 
     public Invoice(){
-        super();
         this.invoiceId = UUID.randomUUID().toString();
     }
 

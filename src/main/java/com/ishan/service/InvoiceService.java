@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import static com.ishan.constants.Constants.PDF_URL_PREFIX;
+
 @Component
 @Scope("singleton")
 public class InvoiceService {
@@ -71,7 +73,7 @@ public class InvoiceService {
 
         // REAL PDF CREATION AND STORING IT IN THE CDN
 
-        Invoice newInvoice = new Invoice(userId, amount, this.cdnUrl + "/images/default/sample.pdf");
+        Invoice newInvoice = new Invoice(userId, amount, this.cdnUrl + PDF_URL_PREFIX);
         this.listOfAllInvoices.add(newInvoice);
         return newInvoice;
     }
